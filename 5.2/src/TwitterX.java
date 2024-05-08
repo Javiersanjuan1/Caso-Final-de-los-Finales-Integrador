@@ -6,12 +6,10 @@ public class TwitterX {
     public static void main(String[] args) {
         List<Usuario2> usuarios = cargarUsuariosDesdeArchivo();
 
-
         System.out.println("Menú:");
         System.out.println("1. Cargar un usuario en memoria");
         System.out.println("2. Publicar un tweet");
         System.out.println("3. Ordenar usuarios por email de forma ascendente");
-
 
         Usuario2 usuarioActual = usuarios.get(0);
         try {
@@ -19,7 +17,6 @@ public class TwitterX {
         } catch (ExcepciónExtendida e) {
             System.out.println("Error: " + e.getMessage());
         }
-
 
         Collections.sort(usuarios, (usuario1, usuario2) -> usuario1.getEmail().compareTo(usuario2.getEmail()));
     }
@@ -37,12 +34,12 @@ public class TwitterX {
 class Usuario2 {
     private String alias;
     private String email;
-    private List<Tweet5> tweet5s;
+    private List<Tweet2> tweets;
 
     public Usuario2(String alias, String email) {
         this.alias = alias;
         this.email = email;
-        this.tweet5s = new ArrayList<>();
+        this.tweets = new ArrayList<>();
     }
 
     public String getAlias() {
@@ -53,20 +50,20 @@ class Usuario2 {
         return email;
     }
 
-    public List<Tweet5> getTweets() {
-        return tweet5s;
+    public List<Tweet2> getTweets() {
+        return tweets;
     }
 
-    public void addTweet(Tweet5 tweet5) {
-        tweet5s.add(tweet5);
+    public void addTweet(Tweet2 tweet) {
+        tweets.add(tweet);
     }
 
     public void publicarTweet(String contenido) throws ExcepciónExtendida {
         if (contenido.length() > 140) {
             throw new ExcepciónExtendida("El tweet no puede tener más de 140 caracteres.");
         }
-        Tweet5 nuevoTweet5 = new Tweet5(contenido, this);
-        addTweet(nuevoTweet5);
+        Tweet2 nuevoTweet = new Tweet2(contenido, this);
+        addTweet(nuevoTweet);
         System.out.println("¡Tweet publicado con éxito!");
     }
 
@@ -80,11 +77,11 @@ class Usuario2 {
     }
 }
 
-class Tweet {
+class Tweet2 {
     private String contenido;
     private Usuario2 remitente;
 
-    public Tweet(String contenido, Usuario2 remitente) {
+    public Tweet2(String contenido, Usuario2 remitente) {
         this.contenido = contenido;
         this.remitente = remitente;
     }
